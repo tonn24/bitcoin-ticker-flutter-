@@ -6,7 +6,15 @@ import 'dart:io' show Platform;
 import 'coin_data.dart';
 const appColor = Colors.lightGreen;
 
-
+/*
+class IconButton extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return new IconButton(
+      // Bitcoin
+      icon: new Icon(CryptoFontIcons.BTC),
+    );
+  }
+}*/
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -15,7 +23,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   double howManyCrypto = 2;
-  String selectedCurrency = 'USD';
+  String selectedCurrency = 'EUR';
   String selectedCrypto = 'BTC';
 
 
@@ -141,7 +149,16 @@ class _PriceScreenState extends State<PriceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('🤑 Coin Ticker'),
+        centerTitle: true,
+        actions: <Widget>[
+        IconButton(
+          icon: new Icon(
+              CryptoFontIcons.BTC,
+              color: Colors.yellow,
+          ),
+        )
+      ],
+        title: Text('Live Crypto Price'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,7 +194,7 @@ class _PriceScreenState extends State<PriceScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Platform.isAndroid ? androidCurrencyDropdown() : iOSCurrencyPicker(),
-                androidCryptoDropdown(),
+                Platform.isAndroid ? androidCryptoDropdown(): iOSCryptoPicker(),
               ],
             ),
             ),
